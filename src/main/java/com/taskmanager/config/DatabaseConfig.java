@@ -6,13 +6,13 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 
 public class DatabaseConfig {
-    // Definindo o diretório de dados na pasta "data" do projeto
+    // Defining the data directory in the project's "data" folder
     private static final String DB_NAME = "taskmanager.db";
     private static final String DB_DIR = "data";
     private static final String DB_PATH = DB_DIR + File.separator + DB_NAME;
 
     public static Connection getConnection() throws Exception {
-        // Garante que a pasta de dados exista no projeto
+        // Ensures that the data folder exists in the project
         File dir = new File(DB_DIR);
         if(!dir.exists()) {
             dir.mkdir();

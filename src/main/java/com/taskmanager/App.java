@@ -7,7 +7,6 @@ public class App
 {
     public static void main( String[] args )
     {
-        // Inicializa o banco de dados (cria a tabela se não existir)
         DatabaseConfig.initializeDatabase();
         
         UserInterface ui = new UserInterface();

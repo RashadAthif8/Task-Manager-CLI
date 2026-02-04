@@ -14,7 +14,7 @@ import com.taskmanager.model.Task;
 import com.taskmanager.model.enums.StatusEnum;
 
 public class TaskRepository {
-    // Implementação do método para salvar tarefas
+    // Implementation of the method to save tasks
     public void saveTask(Task task) {
         String sql = "INSERT INTO tasks (title, description, due_date, status) VALUES (?, ?, ?, ?)";
 
@@ -30,12 +30,12 @@ public class TaskRepository {
 
              }
         catch (Exception e) {
-            System.out.println("Erro ao salvar a tarefa: " + e.getMessage());
+            System.out.println("Error saving the task: " + e.getMessage());
         }
 
     }
 
-    // Método para buscar todas as tarefas
+    // Method to fetch all tasks
     public List<Task> findAll() {
         List<Task> tasks = new ArrayList<>();
         String sql = "SELECT * FROM tasks";
@@ -48,12 +48,12 @@ public class TaskRepository {
                 tasks.add(mapResultSetToTask(rs));
             } 
         } catch (Exception e) {
-            System.out.println("Erro ao buscar tarefas: " + e.getMessage());
+            System.out.println("Error fetching tasks: " + e.getMessage());
         }
         return tasks;
     }
 
-    // --- BUSCAR POR ID ---
+    // --- FIND BY ID ---
     public Task findById(Long id) {
         String sql = "SELECT * FROM tasks WHERE id = ?";
         
@@ -67,12 +67,12 @@ public class TaskRepository {
                 }
             }
         } catch (Exception e) {
-            System.err.println("Erro ao buscar tarefa: " + e.getMessage());
+            System.err.println("Error fetching task: " + e.getMessage());
         }
         return null;
     }
 
-    // --- ATUALIZAR ---
+    // --- UPDATE ---
     public void update(Task task) {
         String sql = "UPDATE tasks SET title = ?, description = ?, due_date = ?, status = ? WHERE id = ?";
 
@@ -87,11 +87,11 @@ public class TaskRepository {
             
             pstmt.executeUpdate();
         } catch (Exception e) {
-            System.err.println("Erro ao atualizar tarefa: " + e.getMessage());
+            System.err.println("Error updating task: " + e.getMessage());
         }
     }
 
-    // --- DELETAR ---
+    // --- DELETE ---
     public boolean deleteById(Long id) {
         String sql = "DELETE FROM tasks WHERE id = ?";
 
@@ -100,15 +100,15 @@ public class TaskRepository {
             
             pstmt.setLong(1, id);
             int rowsAffected = pstmt.executeUpdate();
-            return rowsAffected > 0; // Retorna true se algo foi deletado
+            return rowsAffected > 0; // Returns true if something was deleted
             
         } catch (Exception e) {
-            System.err.println("Erro ao deletar tarefa: " + e.getMessage());
+            System.err.println("Error deleting task: " + e.getMessage());
             return false;
         }
     }
 
-    // Método auxiliar para converter a linha do banco em Objeto Java
+    // Helper method to convert a database row into a Java Object
     private Task mapResultSetToTask(ResultSet rs) throws SQLException {
         String title = rs.getString("title");
         String description = rs.getString("description");

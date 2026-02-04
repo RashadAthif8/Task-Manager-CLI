@@ -9,15 +9,15 @@ import java.time.LocalDate;
 import com.taskmanager.model.enums.StatusEnum;
 
 /**
- * Testes unitários para a classe Task
+ * Unit tests for the Task class
  */
 public class TaskTest {
     
     private Task task;
     
     /**
-     * Executa ANTES de cada teste
-     * Cria uma tarefa padrão para usar nos testes
+     * Runs BEFORE each test
+     * Creates a default task to use in the tests
      */
     @BeforeEach
     public void setUp() {

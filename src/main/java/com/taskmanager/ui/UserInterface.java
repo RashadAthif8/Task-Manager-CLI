@@ -19,7 +19,7 @@ public class UserInterface {
     public void start() {
         System.out.println("Welcome to the Task Manager!");
 
-        // Implementar a lógica da interface do usuário aqui
+        // Implement the user interface logic here
         boolean running = true;
 
         while (running) {
@@ -31,33 +31,33 @@ public class UserInterface {
                     createTaskFlow();
                     break;
                 case 2:
-                    // Não precisa de um método específico na UI para listar tarefas
+                    // No specific UI method needed to list tasks
                     taskService.getAllTasks();
                     break;
                 case 3:
-                    // Não precisa de um método específico na UI para buscar tarefa por Id
+                    // No specific UI method needed to find task by Id
                     System.out.print("Task Id to find a task: ");
                     int idFind = scanner.nextInt();
-                    scanner.nextLine(); // Consumir a quebra de linha
+                    scanner.nextLine(); // Consume the newline
                     taskService.findById(idFind);
                     break;
                 case 4:
                     System.out.print("Task Id to update: ");
                     int idUpdate = scanner.nextInt();
-                    scanner.nextLine(); // Consumir a quebra de linha
+                    scanner.nextLine(); // Consume the newline
                     updateTaskFlow(idUpdate);
                     break;
                 case 5:
                     System.out.print("Task Id to update status: ");
                     int idStatus = scanner.nextInt();
-                    scanner.nextLine(); // Consumir a quebra de linha
+                    scanner.nextLine(); // Consume the newline
                     updateStatusFlow(idStatus);
                     break;
                 case 6:
-                    // Não precisa de um método específico na UI para deletar tarefa
+                    // No specific UI method needed to delete task
                     System.out.print("Task Id to delete a task: ");
                     int idDelete = scanner.nextInt();
-                    scanner.nextLine(); // Consumir a quebra de linha
+                    scanner.nextLine(); // Consume the newline
                     taskService.deleteTask(idDelete);
                     break;
                 case 0:
@@ -66,7 +66,7 @@ public class UserInterface {
                     System.out.println("Exiting Task Manager. Goodbye!");
                     break;
                 default:
-                    System.out.println("Opção inválida.");
+                    System.out.println("Invalid option.");
                     break;
 
             }
@@ -77,8 +77,8 @@ public class UserInterface {
 
     }
 
-    // DONE: IMPLEMENTAR O MÉTODO readOption() AQUI
-    // Este método deve ler a opção do usuário e retornar um inteiro
+    // DONE: IMPLEMENT THE readOption() METHOD HERE
+    // This method should read the user's option and return an integer
     private int readOption() {
         try {
             System.out.print("\nSelect an option: ");
@@ -88,20 +88,20 @@ public class UserInterface {
         }
     }
 
-    // DONE: IMPLEMENTAR O MÉTODO createTaskFlow() AQUI
-    // Este método deve guiar o usuário pelo processo de criação de uma nova tarefa
+    // DONE: IMPLEMENT THE createTaskFlow() METHOD HERE
+    // This method should guide the user through the process of creating a new task
     private void createTaskFlow() {
         System.out.println("\n--- New Task ---");
 
-        // 1. Lendo Texto Simples (Título)
+        // 1. Reading Simple Text (Title)
         System.out.print("Title: ");
         String title = scanner.nextLine();
 
-        // 2. Lendo Texto Longo (Descrição)
+        // 2. Reading Long Text (Description)
         System.out.print("Description: ");
         String description = scanner.nextLine();
 
-        // 3. Lendo Data (Data de Vencimento)
+        // 3. Reading Date (Due Date)
         System.out.print("Due Date (YYYY-MM-DD): ");
         String dueDateInput = scanner.nextLine();
         LocalDate dueDate = LocalDate.parse(dueDateInput);
@@ -111,11 +111,11 @@ public class UserInterface {
         
     }
 
-    // TO DO: IMPLEMENTAR O MÉTODO updateTaskFlow() AQUI
-    // Este método deve guiar o usuário pelo processo de atualização de uma nova tarefa
+    // TO DO: IMPLEMENT THE updateTaskFlow() METHOD HERE
+    // This method should guide the user through the process of updating a task
     private void updateTaskFlow(int taskId) {
         System.out.println("\n--- Update Task ---");
-        // 1. Verificar se a tarefa existe antes de perguntar qualquer coisa
+        // 1. Check if the task exists before asking anything
         Task task = taskService.findById(taskId);
 
         if (task == null) {
@@ -123,11 +123,11 @@ public class UserInterface {
             return;
         }  
 
-        // 2. Mostrar os dados atuais da tarefa
+        // 2. Show the current task data
         System.out.println("\n--- Updating Task " + taskId + " ---");
         System.out.println("Current Data: " + task.getTitle() + "\n" + task.getDescription() + "\n" + task.getDueDate());
 
-        // 2. Coletamos os novos dados
+        // 2. Collect the new data
         System.out.print("New Title: ");
         String newTitle = scanner.nextLine();
 
@@ -137,36 +137,36 @@ public class UserInterface {
         System.out.print("New Due Date (YYYY-MM-DD): ");
         LocalDate newDueDate = LocalDate.parse(scanner.nextLine());
 
-        // 3. Criamos um objeto Task temporário com os novos dados
-        // IMPORTANTE: O ID deve ser o mesmo da tarefa que queremos mudar
+        // 3. Create a temporary Task object with the new data
+        // IMPORTANT: The ID must be the same as the task we want to change
         Task taskAtualizada = new Task(newTitle, newDescription, newDueDate);
-        taskAtualizada.setId((long) taskId); // O ID que veio do parâmetro
-        taskAtualizada.setStatus(task.getStatus()); // Mantém o status atual
+        taskAtualizada.setId((long) taskId); // The ID that came from the parameter
+        taskAtualizada.setStatus(task.getStatus()); // Keep the current status
 
-        // 4. Enviamos para o Service fazer a substituição
+        // 4. Send to the Service to make the replacement
         taskService.updateTask(taskAtualizada);
     }
 
-   // TO DO: IMPLEMENTAR MÉTODO DE ATUALIZAÇÃO DE STATUS DA TAREFA AQUI
-   // Este método deve guiar o usuário pelo processo de atualização do status de uma tarefa
+    // TO DO: IMPLEMENT THE METHOD TO UPDATE TASK STATUS HERE
+    // This method should guide the user through the process of updating a task's status
    private void updateStatusFlow(int taskId) {
         System.out.println("\n--- Update Task Status ---");
 
-        // 1. Verificar se a tarefa existe antes de perguntar qualquer coisa
+        // 1. Check if the task exists before asking anything
         Task task = taskService.findById(taskId);
         if (task == null) {
             System.out.println("Task with Id " + taskId + " not found.");
             return;
         } 
 
-        // 2. Mostrar o status atual da tarefa
+        // 2. Show the current status of the task
         System.out.println("Current Status: " + task.getStatus());
 
-        // 3. Coletar o novo status
+        // 3. Collect the new status
         System.out.print("New Status (DONE, IN_PROGRESS, TO DO, CANCELLED): ");
         String newStatusInput = scanner.nextLine();
         
-        // 4. Atualizar o status da tarefa com base na entrada do usuário
+        // 4. Update the task status based on user input
         if (newStatusInput.equals("DONE")) {
             taskService.markAsDone(taskId);
         } else if ( newStatusInput.equals("IN_PROGRESS")) {
@@ -180,8 +180,8 @@ public class UserInterface {
         }
    }
 
-    // DONE: IMPLEMENTAR O MÉTODO menuTaskManager() AQUI
-    // Este método deve exibir o menu principal do gerenciador de tarefas
+    // DONE: IMPLEMENT THE menuTaskManager() METHOD HERE
+    // This method should display the main menu of the task manager
     private void menuTaskManager() {
         System.out.println("\n--- Task Manager Menu ---");
         System.out.println("1. Create Task");

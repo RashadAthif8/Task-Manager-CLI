@@ -21,7 +21,7 @@ public class Task {
     @Getter @Setter
     private StatusEnum status;
 
-    // Construtor SEM o parâmetro id
+    // Constructor WITHOUT the id parameter
     public Task(String title, String description, LocalDate dueDate) {
         this.title = title;
         this.description = description;
@@ -29,7 +29,7 @@ public class Task {
         this.status = StatusEnum.TO_DO;
     }
 
-    // Método para setar o ID (será chamado pelo TaskManager)
+    // Method to set the ID (will be called by TaskManager)
     public void setId(Long id) {
         if (this.id == null) {
             this.id = id;
@@ -37,7 +37,7 @@ public class Task {
     }
 
     public void showStatus(){
-        //System.out.println("------ Status da tarefa: " + this.status + " ------");
+        //System.out.println("------ Task status: " + this.status + " ------");
         System.out.println("ID: " + this.id);
         System.out.println("Titulo: " + this.title);
         System.out.println("Descricao: " + this.description);
@@ -46,13 +46,13 @@ public class Task {
 
         if (isOverdue()) {
             System.out.println("----------");
-            System.out.println("Atencao: Esta tarefa esta atrasada!");
+            System.out.println("Attention: This task is overdue!");
             System.out.println("----------");
         }
 
         if (isDueDate()) {
             System.out.println("----------");
-            System.out.println("Lembrete: Esta tarefa deve ser realizada ainda hoje!");
+            System.out.println("Reminder: This task must be completed today!");
             System.out.println("----------");
 
         }

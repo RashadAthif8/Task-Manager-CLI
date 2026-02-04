@@ -15,10 +15,10 @@ public class TaskServiceImpl implements TaskService {
     private Long idCounter = 1L;
     private final TaskRepository taskRepository = new TaskRepository();
 
-    // Cria uma nova tarefa
+    // Create a new task
     @Override
     public Task createTask(String title, String description, LocalDate dueDate) {
-        // 1. Validação de Negócio (Guard Clauses)
+        // 1. Business Validation (Guard Clauses)
         if (title == null || title.isBlank()) {
             throw new IllegalArgumentException("Title cannot be empty"); 
         }
@@ -27,23 +27,23 @@ public class TaskServiceImpl implements TaskService {
             throw new IllegalArgumentException("Due Date cannot be in the past"); 
         }
 
-        // 2. Criação do Objeto
-        // Dica: Se o seu construtor aceitar o ID, melhor. 
-        // Caso contrário, o setId está correto após a criação.
+        // 2. Object Creation
+        // If your constructor accepts the ID, that's better.
+        // Otherwise, setId is correct after creation.
         Task newTask = new Task(title, description, dueDate);
         newTask.setId(idCounter++);
 
         tasks.add(newTask);
-        // TODO: Integrar método saveTask() do TaskRepository aqui
+        // TODO: Integrate saveTask() method from TaskRepository here
         taskRepository.saveTask(newTask);
         return newTask;
 
     }
 
-    // Lista todas as tarefas
+    // List all tasks
     @Override
     public List<Task> getAllTasks() {
-        // TODO: Integrar método findAll() do TaskRepository aqui
+        //Integrate findAll() method from TaskRepository here
         List<Task> tasksFromDb = taskRepository.findAll();
         List<Task> sortedTasks = tasksFromDb.stream()
                 .sorted(Comparator.comparing(Task::getDueDate, Comparator.nullsLast(Comparator.naturalOrder())))
@@ -58,9 +58,9 @@ public class TaskServiceImpl implements TaskService {
         return sortedTasks;
     }
 
-    // Listar Tarefas por Id
+    // List Tasks by Id
     public Task findByIdLong(Long id) {
-        // TODO: Integrar método findById() do TaskRepository aqui
+        // Integrate findById() method from TaskRepository here
         Task taskFromDb = taskRepository.findById(id);
         for (Task task : tasks) {
             if (task.getId().equals(id)) {
@@ -73,17 +73,17 @@ public class TaskServiceImpl implements TaskService {
         return null;
     }
 
-    // Este é o "atalho" para você não precisar digitar o L
+    // This is the "shortcut" so you don't have to type the L
     public Task findById(int id) {
-        return findByIdLong((long) id); // Converte o int para Long e chama o método acima
+        return findByIdLong((long) id); // Converts int to Long and calls the method above
     }
 
-    // Deletar Tarefas por Id
+    // Delete Tasks by Id
     public void deleteTaskLong(Long id) {
-        // TODO: Integrar método deleteById() do TaskRepository aqui
+        // Integrate deleteById() method from TaskRepository here
         boolean deletedFromDb = taskRepository.deleteById(id);
 
-        // removeIf retorna true se encontrou e removeu algo
+        // removeIf returns true if it found and removed something
         boolean removed = tasks.removeIf(task -> task.getId().equals(id));
         
         if (deletedFromDb && removed) {
@@ -93,7 +93,6 @@ public class TaskServiceImpl implements TaskService {
         }
     }
 
-    // Atualizar Tarefas
     public void updateTask(Task task) {
         Task existingTask = findByIdLong(task.getId());
 
@@ -102,27 +101,22 @@ public class TaskServiceImpl implements TaskService {
             existingTask.setDescription(task.getDescription());
             existingTask.setDueDate(task.getDueDate());
             existingTask.setStatus(task.getStatus());
-            // TODO: Integrar método update() do TaskRepository aqui
             taskRepository.update(existingTask);
         }
 
         System.out.println("Task with Id " + task.getId() + " was updated.");
     }
 
-    // Deletar Tarefas
     public void deleteTask(int id) {
         deleteTaskLong((long) id);
     }
 
-    // ========== Métodos de Marcação de Status ==========
 
-    // Marcar Tarefas como DONE
     public void markAsDoneLong(Long id) {
         Task task = findByIdLong(id);
         
         if (task != null) {
             task.setStatus(StatusEnum.DONE);
-            // TODO: Integrar método update() do TaskRepository aqui (para atualizar status)
             taskRepository.update(task);
             System.out.println("Task with Id " + id + " marked as done.");
         } else {
@@ -130,18 +124,17 @@ public class TaskServiceImpl implements TaskService {
         }
     }
 
-    // Atalhos para int
     public void markAsDone(int id) {
         markAsDoneLong((long) id);
     }
 
-    // Marcar Tarefas como WIP
+    // Mark Tasks as WIP
     public void markAsWIPLong(Long id) {
         Task task = findByIdLong(id);
         
         if (task != null) {
             task.setStatus(StatusEnum.WIP);
-            // TODO: Integrar método update() do TaskRepository aqui (para atualizar status)
+            // Integrate update() method from TaskRepository here (to update status)
             taskRepository.update(task);
             System.out.println("Task with Id " + id + " marked as in progress.");
         } else {
@@ -149,18 +142,18 @@ public class TaskServiceImpl implements TaskService {
         }
     }
 
-    // Atalhos para int
+    // Shortcuts for int
     public void markAsWIP(int id) {
         markAsWIPLong((long) id);
     }
 
-    // Marcar Tarefas como TO_DO
+    // Mark Tasks 
     public void markAsToDoLong(Long id) {
         Task task = findByIdLong(id);
         
         if (task != null) {
             task.setStatus(StatusEnum.TO_DO);
-            // TODO: Integrar método update() do TaskRepository aqui (para atualizar status)
+            // Integrate update() method from TaskRepository here (to update status)
             taskRepository.update(task);
             System.out.println("Task with Id " + id + " marked as to do.");
         } else {
@@ -168,18 +161,18 @@ public class TaskServiceImpl implements TaskService {
         }
     }
 
-    // Atalhos para int
+    // Shortcuts for int
     public void markAsToDo(int id) {
         markAsToDoLong((long) id);
     }
 
-    // Marcar Tarefas como CANCELLED
+    // Mark Tasks as CANCELLED
     public void markAsCancelledLong(Long id) {
         Task task = findByIdLong(id);
         
         if (task != null) {
             task.setStatus(StatusEnum.CANCELLED);
-            // TODO: Integrar método update() do TaskRepository aqui (para atualizar status)
+            // Integrate update() method from TaskRepository here (to update status)
             taskRepository.update(task);
             System.out.println("Task with Id " + id + " marked as cancelled.");
         } else {
@@ -187,7 +180,7 @@ public class TaskServiceImpl implements TaskService {
         }
     }
 
-    // Atalhos para int
+    // Shortcuts for int
     public void markAsCancelled(int id) {
         markAsCancelledLong((long) id);
     }
