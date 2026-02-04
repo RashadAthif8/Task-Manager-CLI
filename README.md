@@ -8,7 +8,7 @@ Clone and run:
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR-USERNAME/taskmanager-cli.git
+git clone https://github.com/RashadAthif8/Task-Manager-CLI
 
 # Enter the directory
 cd taskmanager-cli
