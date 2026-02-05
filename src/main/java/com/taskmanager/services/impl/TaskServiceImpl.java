@@ -34,7 +34,6 @@ public class TaskServiceImpl implements TaskService {
         newTask.setId(idCounter++);
 
         tasks.add(newTask);
-        // TODO: Integrate saveTask() method from TaskRepository here
         taskRepository.saveTask(newTask);
         return newTask;
 

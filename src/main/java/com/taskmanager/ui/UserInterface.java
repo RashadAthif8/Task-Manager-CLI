@@ -77,7 +77,6 @@ public class UserInterface {
 
     }
 
-    // DONE: IMPLEMENT THE readOption() METHOD HERE
     // This method should read the user's option and return an integer
     private int readOption() {
         try {
@@ -88,7 +87,6 @@ public class UserInterface {
         }
     }
 
-    // DONE: IMPLEMENT THE createTaskFlow() METHOD HERE
     // This method should guide the user through the process of creating a new task
     private void createTaskFlow() {
         System.out.println("\n--- New Task ---");
@@ -111,7 +109,6 @@ public class UserInterface {
         
     }
 
-    // TO DO: IMPLEMENT THE updateTaskFlow() METHOD HERE
     // This method should guide the user through the process of updating a task
     private void updateTaskFlow(int taskId) {
         System.out.println("\n--- Update Task ---");
@@ -147,7 +144,6 @@ public class UserInterface {
         taskService.updateTask(taskAtualizada);
     }
 
-    // TO DO: IMPLEMENT THE METHOD TO UPDATE TASK STATUS HERE
     // This method should guide the user through the process of updating a task's status
    private void updateStatusFlow(int taskId) {
         System.out.println("\n--- Update Task Status ---");
@@ -180,7 +176,6 @@ public class UserInterface {
         }
    }
 
-    // DONE: IMPLEMENT THE menuTaskManager() METHOD HERE
     // This method should display the main menu of the task manager
     private void menuTaskManager() {
         System.out.println("\n--- Task Manager Menu ---");

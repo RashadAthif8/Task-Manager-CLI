@@ -37,7 +37,7 @@ public class Task {
     }
 
     public void showStatus(){
-        //System.out.println("------ Task status: " + this.status + " ------");
+        System.out.println("------ Task status: " + this.status + " ------");
         System.out.println("ID: " + this.id);
         System.out.println("Titulo: " + this.title);
         System.out.println("Descricao: " + this.description);
