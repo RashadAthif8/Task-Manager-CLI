@@ -36,26 +36,26 @@ public class UserInterface {
                     break;
                 case 3:
                     // No specific UI method needed to find task by Id
-                    System.out.print("Task Id to find a task: ");
+                    System.out.println("Task Id to find a task: ");
                     int idFind = scanner.nextInt();
                     scanner.nextLine(); // Consume the newline
                     taskService.findById(idFind);
                     break;
                 case 4:
-                    System.out.print("Task Id to update: ");
+                    System.out.println("Task Id to update: ");
                     int idUpdate = scanner.nextInt();
                     scanner.nextLine(); // Consume the newline
                     updateTaskFlow(idUpdate);
                     break;
                 case 5:
-                    System.out.print("Task Id to update status: ");
+                    System.out.println("Task Id to update status: ");
                     int idStatus = scanner.nextInt();
                     scanner.nextLine(); // Consume the newline
                     updateStatusFlow(idStatus);
                     break;
                 case 6:
                     // No specific UI method needed to delete task
-                    System.out.print("Task Id to delete a task: ");
+                    System.out.println("Task Id to delete a task: ");
                     int idDelete = scanner.nextInt();
                     scanner.nextLine(); // Consume the newline
                     taskService.deleteTask(idDelete);
@@ -80,7 +80,7 @@ public class UserInterface {
     // This method should read the user's option and return an integer
     private int readOption() {
         try {
-            System.out.print("\nSelect an option: ");
+            System.out.println("\nSelect an option: ");
             return Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
             return -1;
@@ -90,17 +90,21 @@ public class UserInterface {
     // This method should guide the user through the process of creating a new task
     private void createTaskFlow() {
         System.out.println("\n--- New Task ---");
+        System.out.flush();
 
         // 1. Reading Simple Text (Title)
-        System.out.print("Title: ");
+        System.out.println("Title: ");
+        System.out.flush();
         String title = scanner.nextLine();
 
         // 2. Reading Long Text (Description)
-        System.out.print("Description: ");
+        System.out.println("Description: ");
+        System.out.flush();
         String description = scanner.nextLine();
 
         // 3. Reading Date (Due Date)
-        System.out.print("Due Date (YYYY-MM-DD): ");
+        System.out.println("Due Date (YYYY-MM-DD): ");
+        System.out.flush();
         String dueDateInput = scanner.nextLine();
         LocalDate dueDate = LocalDate.parse(dueDateInput);
 
@@ -125,13 +129,13 @@ public class UserInterface {
         System.out.println("Current Data: " + task.getTitle() + "\n" + task.getDescription() + "\n" + task.getDueDate());
 
         // 2. Collect the new data
-        System.out.print("New Title: ");
+        System.out.println("New Title: ");
         String newTitle = scanner.nextLine();
 
-        System.out.print("New Descriptin: ");
+        System.out.println("New Descriptin: ");
         String newDescription = scanner.nextLine();
 
-        System.out.print("New Due Date (YYYY-MM-DD): ");
+        System.out.println("New Due Date (YYYY-MM-DD): ");
         LocalDate newDueDate = LocalDate.parse(scanner.nextLine());
 
         // 3. Create a temporary Task object with the new data
@@ -159,7 +163,7 @@ public class UserInterface {
         System.out.println("Current Status: " + task.getStatus());
 
         // 3. Collect the new status
-        System.out.print("New Status (DONE, IN_PROGRESS, TO DO, CANCELLED): ");
+        System.out.println("New Status (DONE, IN_PROGRESS, TO DO, CANCELLED): ");
         String newStatusInput = scanner.nextLine();
         
         // 4. Update the task status based on user input

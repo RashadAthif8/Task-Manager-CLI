@@ -68,7 +68,6 @@ public class TaskServiceImpl implements TaskService {
                 return taskFromDb;
             }
         }
-        System.out.println("Task with Id " + id + " not found.");
         return null;
     }
 
@@ -94,6 +93,7 @@ public class TaskServiceImpl implements TaskService {
 
     public void updateTask(Task task) {
         Task existingTask = findByIdLong(task.getId());
+        
 
         if (existingTask != null) {
             existingTask.setTitle(task.getTitle());
@@ -101,9 +101,10 @@ public class TaskServiceImpl implements TaskService {
             existingTask.setDueDate(task.getDueDate());
             existingTask.setStatus(task.getStatus());
             taskRepository.update(existingTask);
+            System.out.println("Task with Id " + task.getId() + " was updated.");
+        } else {
+            System.out.println("Task with Id " + task.getId() + " not found.");
         }
-
-        System.out.println("Task with Id " + task.getId() + " was updated.");
     }
 
     public void deleteTask(int id) {
@@ -113,13 +114,12 @@ public class TaskServiceImpl implements TaskService {
 
     public void markAsDoneLong(Long id) {
         Task task = findByIdLong(id);
-        
         if (task != null) {
             task.setStatus(StatusEnum.DONE);
             taskRepository.update(task);
             System.out.println("Task with Id " + id + " marked as done.");
         } else {
-            System.out.println("Error: Could not find task with Id " + id);
+            System.out.println("Task with Id " + id + " not found.");
         }
     }
 
@@ -130,14 +130,13 @@ public class TaskServiceImpl implements TaskService {
     // Mark Tasks as WIP
     public void markAsWIPLong(Long id) {
         Task task = findByIdLong(id);
-        
         if (task != null) {
             task.setStatus(StatusEnum.WIP);
             // Integrate update() method from TaskRepository here (to update status)
             taskRepository.update(task);
             System.out.println("Task with Id " + id + " marked as in progress.");
         } else {
-            System.out.println("Error: Could not find task with Id " + id);
+            System.out.println("Task with Id " + id + " not found.");
         }
     }
 
@@ -149,14 +148,13 @@ public class TaskServiceImpl implements TaskService {
     // Mark Tasks 
     public void markAsToDoLong(Long id) {
         Task task = findByIdLong(id);
-        
         if (task != null) {
             task.setStatus(StatusEnum.TO_DO);
             // Integrate update() method from TaskRepository here (to update status)
             taskRepository.update(task);
             System.out.println("Task with Id " + id + " marked as to do.");
         } else {
-            System.out.println("Error: Could not find task with Id " + id);
+            System.out.println("Task with Id " + id + " not found.");
         }
     }
 
@@ -168,14 +166,13 @@ public class TaskServiceImpl implements TaskService {
     // Mark Tasks as CANCELLED
     public void markAsCancelledLong(Long id) {
         Task task = findByIdLong(id);
-        
         if (task != null) {
             task.setStatus(StatusEnum.CANCELLED);
             // Integrate update() method from TaskRepository here (to update status)
             taskRepository.update(task);
             System.out.println("Task with Id " + id + " marked as cancelled.");
         } else {
-            System.out.println("Error: Could not find task with Id " + id);
+            System.out.println("Task with Id " + id + " not found.");
         }
     }
 

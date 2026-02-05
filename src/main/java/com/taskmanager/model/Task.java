@@ -39,9 +39,9 @@ public class Task {
     public void showStatus(){
         System.out.println("------ Task status: " + this.status + " ------");
         System.out.println("ID: " + this.id);
-        System.out.println("Titulo: " + this.title);
-        System.out.println("Descricao: " + this.description);
-        System.out.println("Data Final: " + this.dueDate);
+        System.out.println("Title: " + this.title);
+        System.out.println("Description: " + this.description);
+        System.out.println("Due Date: " + this.dueDate);
         System.out.println("Status: " + this.status);
 
         if (isOverdue()) {
